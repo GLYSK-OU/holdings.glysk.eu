@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GLYSK Holdings — Venture Builder &amp; Early-Stage Investor</title>
+<meta name="description" content="GLYSK Holdings is a venture builder and early-stage investor. We partner with EU founders in fintech, B2B SaaS, and AI-enabled technology before the market catches on.">
+<meta property="og:title" content="GLYSK Holdings">
+<meta property="og:description" content="Venture builder and early-stage investor. We see potential before the market does.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://holdings.glysk.eu">
+<link rel="canonical" href="https://holdings.glysk.eu">
+
+<!-- ═══════════════════════════════════════════════════════
+     QUICK NAVIGATION (search these labels to jump to section)
+     ─────────────────────────────────────────────────────────
+     FONTS          — Google Fonts import
+     CSS VARIABLES  — Theme tokens (colors, spacing, type)
+     RESET          — Base resets
+     LAYOUT         — Container, grid helpers
+     NAV            — Navigation bar styles
+     HERO           — Hero section styles
+     ABOUT          — About section styles
+     THESIS         — Investment thesis section styles
+     PORTFOLIO      — Portfolio section styles
+     CONTACT        — Contact section styles
+     FOOTER         — Footer styles
+     ANIMATIONS     — Reveal / scroll animations
+     RESPONSIVE     — Media queries
+     HTML NAV       — Navigation markup
+     HTML HERO      — Hero markup
+     HTML ABOUT     — About markup
+     HTML THESIS    — Investment thesis markup
+     HTML PORTFOLIO — Portfolio markup
+     HTML CONTACT   — Contact markup
+     HTML FOOTER    — Footer markup
+     JAVASCRIPT     — Theme toggle, scroll, hamburger
+═══════════════════════════════════════════════════════ -->
+
+<style>
+
+/* ─── FONTS ─────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,200;1,300;1,400&display=swap');
+
+/* ─── CSS VARIABLES ─────────────────────────────────────── */
+:root {
+  --bg:          #111111;
+  --bg-alt:      #191919;
+  --surface:     #1e1e1e;
+  --border:      rgba(243,240,234,0.10);
+  --text:        rgba(243,240,234,0.88);
+  --text-soft:   rgba(243,240,234,0.55);
+  --text-muted:  rgba(243,240,234,0.35);
+  --accent:      rgba(243,240,234,0.88);
+  --accent-inv:  #111111;
+  --subtle:      rgba(243,240,234,0.06);
+
+  --font:        'Jost', sans-serif;
+  --max-w:       1120px;
+  --pad-x:       clamp(1.25rem, 5vw, 3rem);
+  --section-gap: clamp(5rem, 10vw, 9rem);
+  --radius:      4px;
+
+  --ease-out:    cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+[data-theme="light"] {
+  --bg:          #F6F3EE;
+  --bg-alt:      #EEE9E1;
+  --surface:     #E8E3DA;
+  --border:      rgba(17,17,17,0.12);
+  --text:        rgba(17,17,17,0.88);
+  --text-soft:   rgba(17,17,17,0.55);
+  --text-muted:  rgba(17,17,17,0.35);
+  --accent:      rgba(17,17,17,0.88);
+  --accent-inv:  #F6F3EE;
+  --subtle:      rgba(17,17,17,0.05);
+}
+
+/* ─── RESET ─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  transition: background 0.35s var(--ease-out), color 0.35s var(--ease-out);
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; }
+ul { list-style: none; }
+
+/* ─── LAYOUT ─────────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--pad-x);
+}
+
+section {
+  padding: var(--section-gap) 0;
+}
+
+hr.rule {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
+}
+
+/* ─── NAV ───────────────────────────────────────────────── */
+#nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--pad-x);
+  height: 64px;
+  transition: background 0.4s var(--ease-out), border-color 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+}
+
+#nav.scrolled {
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 2px 24px rgba(0,0,0,0.12);
+}
+
+/* Logo */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  color: var(--text);
+}
+
+.nav-logo-mark {
+  width: 32px;
+  height: 32px;
+  color: var(--text);
+  flex-shrink: 0;
+}
+
+.nav-logo-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.nav-logo-name {
+  font-family: var(--font);
+  font-weight: 200;
+  font-size: 0.95rem;
+  letter-spacing: 0.34em;
+  color: var(--text);
+}
+
+.nav-logo-entity {
+  font-family: var(--font);
+  font-weight: 300;
+  font-size: 0.58rem;
+  letter-spacing: 0.48em;
+  color: var(--text-soft);
+  text-transform: uppercase;
+}
+
+/* Nav links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-links a {
+  font-size: 0.78rem;
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  color: var(--text-soft);
+  transition: color 0.2s;
+  text-transform: uppercase;
+}
+
+.nav-links a:hover { color: var(--text); }
+
+/* Nav right */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Theme toggle */
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-soft);
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: color 0.2s, background 0.2s;
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover { color: var(--text); background: var(--subtle); }
+.theme-toggle svg { width: 16px; height: 16px; }
+
+[data-theme="dark"]  .icon-sun  { display: block; }
+[data-theme="dark"]  .icon-moon { display: none;  }
+[data-theme="light"] .icon-sun  { display: none;  }
+[data-theme="light"] .icon-moon { display: block; }
+
+/* CTA button */
+.btn-nav {
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.45rem 1.1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  background: var(--subtle);
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.btn-nav:hover {
+  background: var(--text);
+  color: var(--accent-inv);
+  border-color: transparent;
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 1.5px;
+  background: var(--text);
+  transition: transform 0.3s var(--ease-out), opacity 0.3s;
+}
+
+body.menu-open .hamburger span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+body.menu-open .hamburger span:nth-child(2) { opacity: 0; }
+body.menu-open .hamburger span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* Mobile menu */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    position: fixed;
+    top: 64px; left: 0; right: 0; bottom: 0;
+    background: var(--bg);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a { font-size: 1.1rem; }
+  .hamburger { display: flex; }
+  .btn-nav { display: none; }
+}
+
+/* ─── BUTTONS ────────────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.6rem;
+  background: var(--text);
+  color: var(--accent-inv);
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: opacity 0.2s, transform 0.2s var(--ease-spring);
+}
+
+.btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+.btn-primary svg { width: 13px; height: 13px; flex-shrink: 0; }
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.6rem;
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.btn-outline:hover { background: var(--subtle); border-color: var(--text-soft); }
+
+/* ─── SECTION LABELS ─────────────────────────────────────── */
+.section-label {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1.25rem;
+}
+
+/* ─── HERO ───────────────────────────────────────────────── */
+#hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-top: 64px;
+  overflow: hidden;
+}
+
+.hero-glow {
+  position: absolute;
+  top: -20%;
+  right: -15%;
+  width: 55vw;
+  height: 55vw;
+  max-width: 700px;
+  max-height: 700px;
+  background: radial-gradient(circle, rgba(243,240,234,0.04) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+[data-theme="light"] .hero-glow {
+  background: radial-gradient(circle, rgba(17,17,17,0.04) 0%, transparent 65%);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+}
+
+.hero-eyebrow {
+  font-size: 0.7rem;
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 1.75rem;
+}
+
+.headline {
+  font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+  font-weight: 200;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 1.75rem;
+}
+
+.headline em {
+  font-style: italic;
+  font-weight: 200;
+  color: var(--text-soft);
+}
+
+.hero-sub {
+  font-size: clamp(1rem, 1.6vw, 1.125rem);
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-soft);
+  max-width: 560px;
+  margin-bottom: 2.5rem;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.hero-scroll {
+  font-size: 0.72rem;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+
+.hero-scroll:hover { color: var(--text-soft); }
+
+/* ─── ABOUT ──────────────────────────────────────────────── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+}
+
+.about-left h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 200;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin-bottom: 2.5rem;
+}
+
+.stats-row {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.stat-item { display: flex; flex-direction: column; gap: 0.25rem; }
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 200;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--text);
+}
+
+.stat-label {
+  font-size: 0.65rem;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.about-right p {
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--text-soft);
+  margin-bottom: 1.25rem;
+}
+
+.about-right p:last-child { margin-bottom: 0; }
+.about-right strong { font-weight: 400; color: var(--text); }
+
+/* ─── THESIS ─────────────────────────────────────────────── */
+#thesis {
+  background: var(--bg-alt);
+}
+
+.thesis-inner {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .thesis-inner { grid-template-columns: 1fr; gap: 3rem; }
+}
+
+.thesis-left h2 {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 200;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin-bottom: 1rem;
+}
+
+.thesis-left p {
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-soft);
+}
+
+.thesis-pillars {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 560px) {
+  .thesis-pillars { grid-template-columns: 1fr; }
+}
+
+.pillar {
+  padding: 1.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  transition: border-color 0.2s, transform 0.25s var(--ease-out);
+}
+
+.pillar:hover {
+  border-color: var(--text-muted);
+  transform: translateY(-2px);
+}
+
+.pillar-icon {
+  width: 28px;
+  height: 28px;
+  color: var(--text-soft);
+  margin-bottom: 1rem;
+}
+
+.pillar h3 {
+  font-size: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.6rem;
+  color: var(--text);
+}
+
+.pillar p {
+  font-size: 0.85rem;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--text-soft);
+}
+
+/* ─── PORTFOLIO ──────────────────────────────────────────── */
+.portfolio-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: end;
+  margin-bottom: 3.5rem;
+}
+
+@media (max-width: 768px) {
+  .portfolio-header { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 2.5rem; }
+}
+
+.portfolio-header h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 200;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+
+.portfolio-header p {
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-soft);
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+.portfolio-card {
+  padding: 2rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  transition: border-color 0.2s, transform 0.25s var(--ease-out);
+  position: relative;
+  overflow: hidden;
+}
+
+.portfolio-card:hover {
+  border-color: var(--text-muted);
+  transform: translateY(-3px);
+}
+
+.portfolio-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.portfolio-company-name {
+  font-size: 1.1rem;
+  font-weight: 300;
+  letter-spacing: 0.03em;
+  color: var(--text);
+}
+
+.portfolio-stage-badge {
+  font-size: 0.6rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.25rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.portfolio-sector {
+  font-size: 0.68rem;
+  font-weight: 300;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.portfolio-desc {
+  font-size: 0.88rem;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text-soft);
+  flex: 1;
+}
+
+.portfolio-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+
+.portfolio-link:hover { color: var(--text); }
+.portfolio-link svg { width: 11px; height: 11px; }
+
+/* Stealth card variant */
+.portfolio-card.stealth {
+  opacity: 0.6;
+}
+
+.portfolio-card.stealth:hover { opacity: 1; }
+
+/* ─── CONTACT ────────────────────────────────────────────── */
+.contact-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+}
+
+.contact-left h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 200;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  margin-bottom: 1rem;
+}
+
+.contact-left p {
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-soft);
+  margin-bottom: 2rem;
+}
+
+.contact-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.contact-icon {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--text-soft);
+}
+
+.contact-icon svg { width: 15px; height: 15px; }
+
+.contact-label {
+  font-size: 0.65rem;
+  font-weight: 300;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.2rem;
+}
+
+.contact-val {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--text-soft);
+}
+
+.contact-val a { transition: color 0.2s; }
+.contact-val a:hover { color: var(--text); }
+
+/* ─── FOOTER ─────────────────────────────────────────────── */
+footer {
+  padding: 3rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+}
+
+.footer-logo-mark { width: 22px; height: 22px; color: var(--text-muted); }
+
+.footer-logo-name {
+  font-weight: 200;
+  font-size: 0.75rem;
+  letter-spacing: 0.34em;
+  color: var(--text-muted);
+}
+
+.footer-copy {
+  font-size: 0.72rem;
+  font-weight: 300;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  font-size: 0.7rem;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--text-soft); }
+
+/* ─── ANIMATIONS ─────────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+
+.reveal.visible { opacity: 1; transform: none; }
+
+.d1 { transition-delay: 0.12s; }
+.d2 { transition-delay: 0.24s; }
+.d3 { transition-delay: 0.36s; }
+
+/* ─── POPUP ──────────────────────────────────────────────── */
+.popup-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.popup-overlay.open { display: flex; }
+
+.popup-box {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  max-width: 600px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.popup-close {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--text-muted);
+  transition: color 0.2s;
+}
+
+.popup-close:hover { color: var(--text); }
+
+.popup-title {
+  font-size: 1.25rem;
+  font-weight: 200;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.25rem;
+}
+
+.popup-body p { font-size: 0.9rem; font-weight: 300; line-height: 1.75; color: var(--text-soft); margin-bottom: 0.75rem; }
+.popup-body h3 { font-size: 0.75rem; font-weight: 400; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin: 1.5rem 0 0.5rem; }
+.popup-body a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+.popup-body code { font-family: monospace; font-size: 0.85em; background: var(--subtle); padding: 0.1em 0.35em; border-radius: 2px; }
+
+</style>
+</head>
+
+<body>
+
+<!-- ─── HTML NAV ──────────────────────────────────────────── -->
+<!--
+  Logo: HOLDINGS variant = filled bars (not stroke-only).
+  opacities: 0.44 / 0.66 / 0.88 per brand spec.
+  Ink color: rgba(243,240,234,X) dark · rgba(17,17,17,X) light
+  via currentColor inheritance.
+-->
+<nav id="nav">
+  <a href="#hero" class="nav-logo" aria-label="GLYSK Holdings">
+    <svg class="nav-logo-mark" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect x="10" y="44" width="14" height="26" rx="3" fill="currentColor" opacity="0.44"/>
+      <rect x="30" y="30" width="14" height="40" rx="3" fill="currentColor" opacity="0.66"/>
+      <rect x="50" y="14" width="14" height="56" rx="3" fill="currentColor" opacity="0.88"/>
+    </svg>
+    <div class="nav-logo-text">
+      <span class="nav-logo-name">GLYSK</span>
+      <span class="nav-logo-entity">Holdings</span>
+    </div>
+  </a>
+
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#thesis">Investment Thesis</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://www.glysk.eu" target="_blank" rel="noopener">Advisory ↗</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <button class="theme-toggle" id="theme-btn" aria-label="Toggle light/dark mode" type="button">
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <circle cx="12" cy="12" r="4"/>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </button>
+    <button class="hamburger" id="hamburger" aria-label="Open menu" type="button">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+
+<!-- ─── HTML HERO ─────────────────────────────────────────── -->
+<!--
+  Positioning: holding/investment entity, not advisory.
+  Tagline source: "We invest in moments, not just companies" (Grid Capital site)
+  Eyebrow: EU geography + asset class
+-->
+<section id="hero">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-inner">
+      <p class="hero-eyebrow reveal">Venture Builder &amp; Early-Stage Investor · EU</p>
+      <h1 class="headline reveal d1">
+        Seeing potential<br><em>before the market does.</em>
+      </h1>
+      <p class="hero-sub reveal d2">
+        GLYSK Holdings is the investment and holding entity of the GLYSK Group.
+        We back ambitious founders in fintech, B2B SaaS, and AI-enabled technology.
+        Capital is the start. Execution is the work.
+      </p>
+      <div class="hero-actions reveal d3">
+        <a href="#about" class="btn-primary">
+          Learn more
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M2 7h10M8 3l4 4-4 4"/>
+          </svg>
+        </a>
+        <a href="#contact" class="hero-scroll">Reach out ↓</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+
+<!-- ─── HTML ABOUT ────────────────────────────────────────── -->
+<!--
+  Content adapted from The Grid Capital WordPress site.
+  Stats: 2 portfolio companies confirmed · EU · OÜ (Estonia).
+-->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+
+      <div class="about-left reveal">
+        <div class="section-label">About</div>
+        <h2>We invest in moments,<br>not just companies.</h2>
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="stat-number">3</div>
+            <div class="stat-label">Portfolio Companies</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">EU</div>
+            <div class="stat-label">Primary Focus</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">OÜ</div>
+            <div class="stat-label">Estonia</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-right reveal d1">
+        <p>
+          GLYSK Holdings is a venture builder and early-stage investor. We work with
+          founders at the moment of maximum potential. <strong>Before the model is fully
+          proven. Before the market catches on.</strong>
+        </p>
+        <p>
+          We don't just provide capital. We work inside the company. Validating assumptions,
+          refining go-to-market strategy, and building the foundations for sustainable scaling.
+        </p>
+        <p>
+          Beyond funding, we bring hands-on mentorship, operational depth, and a network built
+          across fintech, B2B SaaS, and AI-enabled industries. We stay close through every
+          stage of growth.
+        </p>
+        <p>
+          Early-stage is the hardest stage. We're designed for it.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+
+<!-- ─── HTML THESIS ───────────────────────────────────────── -->
+<!--
+  Four pillars: Stage · Sectors · Geography · Model.
+  Edit pillar h3 and p to update focus areas.
+-->
+<section id="thesis">
+  <div class="container">
+    <div class="thesis-inner">
+
+      <div class="thesis-left reveal">
+        <div class="section-label">Investment Thesis</div>
+        <h2>Where we look.<br>How we work.</h2>
+        <p>
+          We focus where advisory depth and capital can move together.
+          Our thesis is tight by design. We'd rather be the right partner
+          than the most available one.
+        </p>
+      </div>
+
+      <div class="thesis-pillars reveal d1">
+
+        <div class="pillar">
+          <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/>
+          </svg>
+          <h3>Stage</h3>
+          <p>
+            Pre-seed and seed. We enter when the risk is highest and the
+            potential is greatest. We don't wait for traction. We help create it.
+          </p>
+        </div>
+
+        <div class="pillar">
+          <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <path d="M8 21h8M12 17v4"/>
+          </svg>
+          <h3>Sectors</h3>
+          <p>
+            Fintech, B2B SaaS, and AI-enabled technology. Businesses with
+            structural leverage, recurring economics, and a clear path to
+            European and global scale.
+          </p>
+        </div>
+
+        <div class="pillar">
+          <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          <h3>Geography</h3>
+          <p>
+            EU-based founders, primarily. We know the regulatory landscape,
+            the talent markets, and the investor ecosystem across the continent.
+          </p>
+        </div>
+
+        <div class="pillar">
+          <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          <h3>Model</h3>
+          <p>
+            Active involvement, not passive capital. We embed in the team,
+            contribute to strategy, and bring the GLYSK Advisory network
+            to every portfolio company.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+
+<!-- ─── HTML PORTFOLIO ────────────────────────────────────── -->
+<!--
+  Confirm company names, URLs, descriptions, and sectors before deploying.
+  Add/remove .portfolio-card blocks as the portfolio evolves.
+  Use class="portfolio-card stealth" for undisclosed companies.
+-->
+<section id="portfolio">
+  <div class="container">
+
+    <div class="portfolio-header">
+      <div class="reveal">
+        <div class="section-label">Portfolio</div>
+        <h2>The companies<br>we back.</h2>
+      </div>
+      <p class="reveal d1">
+        Each portfolio company receives more than capital. They receive an embedded
+        partner with advisory depth, operational experience, and a network built
+        for European tech and fintech.
+      </p>
+    </div>
+
+    <div class="portfolio-grid">
+
+      <!-- ── COMPANY 1: Infraware ── -->
+      <div class="portfolio-card reveal">
+        <div class="portfolio-card-top">
+          <div class="portfolio-company-name">Infraware</div>
+          <span class="portfolio-stage-badge">Seed</span>
+        </div>
+        <div class="portfolio-sector">AI · CloudOps · Developer Tools</div>
+        <p class="portfolio-desc">
+          The AI-native terminal for CloudOps. Infraware brings intelligent
+          command-line capabilities to cloud infrastructure management.
+        </p>
+        <a href="https://infraware.dev" target="_blank" rel="noopener" class="portfolio-link" aria-label="Visit Infraware website">
+          infraware.dev
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M2 7h10M8 3l4 4-4 4"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- ── COMPANY 2: Whilesum ── -->
+      <div class="portfolio-card reveal d1">
+        <div class="portfolio-card-top">
+          <div class="portfolio-company-name">Whilesum</div>
+          <span class="portfolio-stage-badge">Pre-seed</span>
+        </div>
+        <div class="portfolio-sector">Fintech · Behavioural Intelligence</div>
+        <p class="portfolio-desc">
+          The first Customer Behavioural Intelligence Platform.
+        </p>
+        <a href="https://whilesum.com" target="_blank" rel="noopener" class="portfolio-link" aria-label="Visit Whilesum website">
+          whilesum.com
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M2 7h10M8 3l4 4-4 4"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- ── COMPANY 3: undisclosed — update when ready ── -->
+      <div class="portfolio-card stealth reveal d2">
+        <div class="portfolio-card-top">
+          <div class="portfolio-company-name">Undisclosed</div>
+          <span class="portfolio-stage-badge">TBC</span>
+        </div>
+        <div class="portfolio-sector">Details coming soon</div>
+        <p class="portfolio-desc">
+          A new portfolio company is joining the GLYSK Holdings family.
+          More details will be published shortly.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+
+<!-- ─── HTML CONTACT ──────────────────────────────────────── -->
+<!--
+  Update email to final holdings email once confirmed.
+  Company registration: GLYSK Holdings OÜ, reg 14772172, Tallinn.
+-->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+
+      <div class="contact-left reveal">
+        <div class="section-label">Contact</div>
+        <h2>Let's talk about your company.</h2>
+        <p>
+          We review every approach. If the fit isn't right today,
+          we'll say so. If it is, we move fast.
+        </p>
+        <a href="mailto:invest@glysk.eu" class="btn-primary">
+          Get in touch
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path d="M2 7h10M8 3l4 4-4 4"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="contact-items reveal d1">
+
+        <div class="contact-item">
+          <div class="contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-val">
+              <a href="mailto:invest@glysk.eu">invest@glysk.eu</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-label">Registered</div>
+            <div class="contact-val">
+              GLYSK Holdings OÜ · Reg. 14772172<br>
+              Tornimäe tn 5, 10145 Tallinn, Estonia
+            </div>
+          </div>
+        </div>
+
+
+        <div class="contact-item">
+          <div class="contact-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-label">Advisory</div>
+            <div class="contact-val">
+              <a href="https://www.glysk.eu" target="_blank" rel="noopener">www.glysk.eu ↗</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── HTML FOOTER ───────────────────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+
+      <a href="#hero" class="footer-logo" aria-label="GLYSK Holdings home">
+        <svg class="footer-logo-mark" viewBox="0 0 88 88" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="10" y="44" width="14" height="26" rx="3" fill="currentColor" opacity="0.44"/>
+          <rect x="30" y="30" width="14" height="40" rx="3" fill="currentColor" opacity="0.66"/>
+          <rect x="50" y="14" width="14" height="56" rx="3" fill="currentColor" opacity="0.88"/>
+        </svg>
+        <span class="footer-logo-name">GLYSK</span>
+      </a>
+
+      <p class="footer-copy">
+        &copy; 2025 GLYSK Holdings OÜ. All rights reserved.
+      </p>
+
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="privacy.html" data-popup-page>Privacy</a>
+        <a href="cookie.html" data-popup-page>Cookies</a>
+        <a href="https://www.glysk.eu" target="_blank" rel="noopener">Advisory ↗</a>
+      </nav>
+
+    </div>
+  </div>
+</footer>
+
+
+<!-- ─── POPUP (Privacy / Cookies) ───────────────────────────── -->
+<div class="popup-overlay" id="page-popup" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+  <div class="popup-box">
+    <button class="popup-close" id="popup-close" aria-label="Close">&times;</button>
+    <h2 class="popup-title" id="popup-title"></h2>
+    <div class="popup-body" id="popup-body"></div>
+  </div>
+</div>
+
+
+<!-- ─── JAVASCRIPT ────────────────────────────────────────── -->
+<script>
+/*
+  1. THEME TOGGLE
+  2. NAV SCROLL STATE
+  3. HAMBURGER MENU
+  4. SCROLL REVEAL
+  5. PAGE POPUPS (Privacy / Cookie)
+*/
+
+/* 1. THEME TOGGLE
+   Persists preference in localStorage.
+   Default: dark. */
+(function() {
+  var saved = localStorage.getItem('glysk-theme');
+  if (saved) document.documentElement.setAttribute('data-theme', saved);
+})();
+
+document.getElementById('theme-btn').addEventListener('click', function() {
+  var html = document.documentElement;
+  var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('glysk-theme', next);
+});
+
+/* 2. NAV SCROLL STATE
+   Adds .scrolled class after 20px — triggers frosted border. */
+var nav = document.getElementById('nav');
+window.addEventListener('scroll', function() {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+}, { passive: true });
+
+/* 3. HAMBURGER MENU
+   Toggles .open on nav-links and .menu-open on body. */
+document.getElementById('hamburger').addEventListener('click', function() {
+  var links = document.getElementById('nav-links');
+  links.classList.toggle('open');
+  document.body.classList.toggle('menu-open');
+});
+
+document.getElementById('nav-links').querySelectorAll('a').forEach(function(a) {
+  a.addEventListener('click', function() {
+    document.getElementById('nav-links').classList.remove('open');
+    document.body.classList.remove('menu-open');
+  });
+});
+
+/* 4. SCROLL REVEAL
+   IntersectionObserver triggers .visible on .reveal elements. */
+var revealEls = document.querySelectorAll('.reveal');
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+revealEls.forEach(function(el) { observer.observe(el); });
+
+/* 5. PAGE POPUPS
+   data-popup-page links open inline modal with pre-written content.
+   Add or edit entries in the `pages` object to update popup content. */
+var pages = {
+  'privacy.html': {
+    title: 'Privacy Notice',
+    body: [
+      '<p>Last updated: March 2025</p>',
+      '<h3>Introduction</h3>',
+      '<p>GLYSK Holdings OÜ is committed to protecting your personal data. ',
+      'This notice explains how we collect, use, and protect it when you visit this website.</p>',
+      '<h3>Data We Collect</h3>',
+      '<p>We may collect basic usage data through privacy-respecting analytics. We do not use advertising trackers. ',
+      'We collect contact information only when you voluntarily submit it via a meeting booking or email.</p>',
+      '<h3>How We Use Your Data</h3>',
+      '<p>Data is used solely to respond to your enquiry or to improve this website. ',
+      'We do not sell, share, or transfer personal data to third parties.</p>',
+      '<h3>Cookies</h3>',
+      '<p>This site uses one functional cookie to remember your light/dark mode preference. See our Cookie Notice for details.</p>',
+      '<h3>Your Rights</h3>',
+      '<p>Under GDPR you have the right to access, correct, or request deletion of your data. ',
+      'Contact us at <a href="mailto:hello@glysk.eu">hello@glysk.eu</a>.</p>',
+      '<h3>Controller</h3>',
+      '<p>GLYSK Holdings OÜ &mdash; Tornimäe tn 5, 10145 Tallinn, Estonia. Reg. 14772172.</p>'
+    ].join('')
+  },
+  'cookie.html': {
+    title: 'Cookie Notice',
+    body: [
+      '<p>Last updated: March 2025</p>',
+      '<h3>What Are Cookies</h3>',
+      '<p>Cookies are small text files stored on your device when you visit a website. ',
+      'They help make sites work efficiently.</p>',
+      '<h3>Cookies We Use</h3>',
+      '<p>This website uses one first-party cookie named <code>glysk-theme</code>. ',
+      'It stores your light or dark mode preference. It contains no personal data and ',
+      'is not shared with any third party.</p>',
+      '<h3>Third-Party Cookies</h3>',
+      '<p>If you interact with our meeting booking link (Google Calendar), that service ',
+      'may set its own cookies subject to Google\'s privacy policy.</p>',
+      '<h3>Managing Cookies</h3>',
+      '<p>You can delete or block cookies through your browser settings at any time. ',
+      'This may affect some site preferences.</p>',
+      '<h3>Contact</h3>',
+      '<p>Questions about this notice? Email <a href="mailto:hello@glysk.eu">hello@glysk.eu</a>.</p>'
+    ].join('')
+  }
+};
+
+var overlay = document.getElementById('page-popup');
+var popupTitle = document.getElementById('popup-title');
+var popupBody = document.getElementById('popup-body');
+
+document.querySelectorAll('[data-popup-page]').forEach(function(link) {
+  link.addEventListener('click', function(e) {
+    e.preventDefault();
+    var page = link.getAttribute('href');
+    var content = pages[page];
+    if (!content) return;
+    popupTitle.textContent = content.title;
+    popupBody.innerHTML = content.body;
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+document.getElementById('popup-close').addEventListener('click', function() {
+  overlay.classList.remove('open');
+  document.body.style.overflow = '';
+});
+
+overlay.addEventListener('click', function(e) {
+  if (e.target === overlay) {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && overlay.classList.contains('open')) {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+});
+</script>
+
+</body>
+</html>
