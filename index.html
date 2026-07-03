@@ -3,6 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111111">
+<!-- Pre-paint theme: set data-theme before first paint to avoid a flash. Auto/Light/Dark cycle handled by the main script. -->
+<script>
+(function(){try{var m=localStorage.getItem('glysk-theme');if(['system','light','dark'].indexOf(m)<0)m='system';var d=(m==='dark'||(m==='system'&&window.matchMedia('(prefers-color-scheme: dark)').matches));document.documentElement.setAttribute('data-theme',d?'dark':'light');}catch(e){}})();
+</script>
 <title>GLYSK Holdings — Venture Builder &amp; Early-Stage Investor</title>
 <meta name="description" content="GLYSK Holdings is a venture builder and early-stage investor. We partner with EU founders in fintech, B2B SaaS, and AI-enabled technology before the market catches on.">
 <meta property="og:title" content="GLYSK Holdings">
@@ -221,10 +226,7 @@ hr.rule {
 .theme-toggle:hover { color: var(--text); background: var(--subtle); }
 .theme-toggle svg { width: 16px; height: 16px; }
 
-[data-theme="dark"]  .icon-sun  { display: block; }
-[data-theme="dark"]  .icon-moon { display: none;  }
-[data-theme="light"] .icon-sun  { display: none;  }
-[data-theme="light"] .icon-moon { display: block; }
+/* Toggle icon is injected by JS to match the active mode (Auto / Light / Dark). */
 
 /* CTA button */
 .btn-nav {
@@ -891,14 +893,9 @@ footer {
   </ul>
 
   <div class="nav-right">
-    <button class="theme-toggle" id="theme-btn" aria-label="Toggle light/dark mode" type="button">
-      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-        <circle cx="12" cy="12" r="4"/>
-        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
-      </svg>
-      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-      </svg>
+    <!-- Theme toggle: Auto → Light → Dark. Icon is set by JS to match the current mode. -->
+    <button class="theme-toggle" id="theme-btn" aria-label="Theme" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>
     </button>
     <button class="hamburger" id="hamburger" aria-label="Open menu" type="button">
       <span></span><span></span><span></span>
@@ -1285,19 +1282,54 @@ footer {
 */
 
 /* 1. THEME TOGGLE
-   Persists preference in localStorage.
-   Default: dark. */
-(function() {
-  var saved = localStorage.getItem('glysk-theme');
-  if (saved) document.documentElement.setAttribute('data-theme', saved);
-})();
+   Auto / Light / Dark (system-aware). Click cycles the modes;
+   the choice is saved to localStorage (key: glysk-theme).
+   "Auto" follows the OS setting and updates live. */
+(function () {
+  /* Auto / Light / Dark — system-aware, ported from the anglerbook toggle. */
+  var htmlEl = document.documentElement;
+  var KEY = 'glysk-theme';
+  var MODES = ['system', 'light', 'dark'];
+  var LABELS = { system: 'Auto', light: 'Light', dark: 'Dark' };
+  var ICON = {
+    system: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg>',
+    light:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>',
+    dark:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>'
+  };
+  var META = { light: '#F6F3EE', dark: '#111111' };
+  var mq = window.matchMedia('(prefers-color-scheme: dark)');
 
-document.getElementById('theme-btn').addEventListener('click', function() {
-  var html = document.documentElement;
-  var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  html.setAttribute('data-theme', next);
-  localStorage.setItem('glysk-theme', next);
-});
+  function getMode() { try { var m = localStorage.getItem(KEY); return MODES.indexOf(m) >= 0 ? m : 'system'; } catch (e) { return 'system'; } }
+  function setMode(m) { try { localStorage.setItem(KEY, m); } catch (e) {} }
+  function resolve(m) { return (m === 'dark' || (m === 'system' && mq.matches)) ? 'dark' : 'light'; }
+  function apply(m) {
+    var r = resolve(m);
+    htmlEl.setAttribute('data-theme', r);
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', META[r]);
+  }
+  function render(btn, m) {
+    btn.innerHTML = ICON[m];
+    var next = MODES[(MODES.indexOf(m) + 1) % MODES.length];
+    btn.setAttribute('aria-label', 'Theme: ' + LABELS[m] + '. Activate for ' + LABELS[next] + '.');
+    btn.title = 'Theme: ' + LABELS[m];
+  }
+
+  apply(getMode());
+
+  var btn = document.getElementById('theme-btn');
+  if (btn) {
+    render(btn, getMode());
+    btn.addEventListener('click', function () {
+      var m = MODES[(MODES.indexOf(getMode()) + 1) % MODES.length];
+      setMode(m); apply(m); render(btn, m);
+    });
+  }
+
+  var onSys = function () { if (getMode() === 'system') apply('system'); };
+  if (mq.addEventListener) mq.addEventListener('change', onSys);
+  else if (mq.addListener) mq.addListener(onSys);
+})();
 
 /* 2. NAV SCROLL STATE
    Adds .scrolled class after 20px — triggers frosted border. */
