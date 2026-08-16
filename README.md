@@ -34,4 +34,4 @@ Hosted at **https://holdings.glysk.eu** via statichost.eu.
 
 - Advisory site: [www.glysk.eu](https://www.glysk.eu) · repo: `GiuseppeLopesMe/glysk-advisory`
 - Registrar: Infomaniak
-- Company: GLYSK Holdings OÜ · Reg. 14772172 · Tallinn, Estonia
+- Company: GLYSK Holdings OÜ · Reg. 17432809 · Tallinn, Estonia
